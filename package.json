@@ -1,0 +1,36 @@
+{
+  "name": "ck-auth-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "build": "esbuild --bundle src/index.ts --sourcemap --outfile=dist/app.js --platform=node --external:pg-hstore"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.12.12",
+    "esbuild": "0.21.4",
+    "node-mocks-http": "^1.14.1",
+    "ts-jest": "^29.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@automapper/classes": "^8.8.1",
+    "@automapper/core": "^8.8.1",
+    "@automapper/sequelize": "^8.8.1",
+    "@aws-sdk/client-dynamodb": "^3.576.0",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "reflect-metadata": "^0.1.14",
+    "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7",
+    "winston": "^3.13.0"
+  }
+}

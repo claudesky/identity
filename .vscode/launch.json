@@ -1,0 +1,25 @@
+{
+    "version": "1.0.0",
+    "configurations": [
+      {
+        "name": "TS-Node",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/ts-node",
+        "runtimeArgs": [
+          "--transpile-only"
+        ],
+        "program": "./src/index.ts",
+        "cwd": "${workspaceRoot}",
+        "internalConsoleOptions": "openOnSessionStart",
+        "skipFiles": ["<node_internals>/**", "node_modules/**"],
+        "env": {
+            "PORT": "3000",
+            "VERSION": "v0.0.1",
+            "AWS_ACCESS_KEY_ID": "DUMMYIDEXAMPLE",
+            "AWS_SECRET_ACCESS_KEY": "DUMMYEXAMPLEKEY",
+            "REGION": "ap-southeast-1"
+        }
+      }
+    ]
+  }
