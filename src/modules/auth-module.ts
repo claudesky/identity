@@ -18,6 +18,7 @@ import {
 import { JwtPayload, sign, verify } from 'jsonwebtoken'
 import {
   FileNotExistException,
+  NotImplementedException,
   NotReadyException,
   UndefinedAttributeException,
   UnexpectedException,
@@ -283,6 +284,11 @@ export class Auth {
 
   decryptJWT(jwt: string): JwtPayload {
     return verify(jwt, this.publicKey, {}) as JwtPayload
+  }
+
+  async verify(): Promise<JwtPayload> {
+    // TODO: More verification
+    throw new NotImplementedException()
   }
 
   async newToken(subject: string): Promise<RefreshTokenResult> {
