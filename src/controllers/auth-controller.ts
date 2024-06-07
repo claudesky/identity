@@ -5,6 +5,7 @@ import {
 } from '../modules/exceptions'
 import { Auth } from '../modules/auth-module'
 import { IUserRepository, User } from '../repositories/user/iuser-repository'
+import { hash, verify } from 'argon2'
 
 type RegisterRequest = {
   email?: string
@@ -95,14 +96,14 @@ export class AuthController {
       user = await this._userRepository.registerByEmail({
         email: request.email,
         name: request.name,
-        password: request.password,
+        password: await hash(request.password),
         phone_number: request.phone_number,
       })
     } else if (typeof request.phone_number === 'string') {
       user = await this._userRepository.registerByPhoneNumber({
         email: request.email,
         name: request.name,
-        password: request.password,
+        password: await hash(request.password),
         phone_number: request.phone_number,
       })
     } else {
@@ -127,18 +128,19 @@ export class AuthController {
       throw new UnexpectedException()
     }
 
+    if (!await verify(user.password, request.password))
+      throw new Error('PLACEHOLDER: Invalid credentials')
+
     const tokenResult = await this._auth.newToken(user.id)
 
-    res.send({user, ...tokenResult})
+    res.send({ user, ...tokenResult })
   }
 
   async verify(req: Request, res: Response) {
     throw new NotImplementedException()
   }
 
-  async refresh(req: Request, res: Response) {
-
-  }
+  async refresh(req: Request, res: Response) {}
 
   async logout(req: Request, res: Response) {
     throw new NotImplementedException()
