@@ -4,6 +4,13 @@ import { authService } from './services/auth-service'
 import { userRepositoryService } from './services/user-repository-service'
 import { AuthController } from './controllers/auth-controller'
 
+// .env files only loaded in dev
+// DEV label dropped by esbuild
+DEV: {
+  const dotenv = require('dotenv') as any
+  dotenv.config()
+}
+
 const authController = new AuthController(authService, userRepositoryService)
 
 const app = express()
