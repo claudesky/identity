@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
-    "build": "esbuild --bundle src/index.ts --sourcemap --outfile=dist/app.js --platform=node --external:pg-hstore"
+    "build": "esbuild --bundle src/index.ts --sourcemap --outfile=dist/app.js --platform=node --external:pg-hstore --drop-labels=DEV"
   },
   "keywords": [],
   "author": "",
@@ -12,9 +12,12 @@
   "description": "",
   "devDependencies": {
     "@jest/globals": "^29.7.0",
+    "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.12.12",
+    "@types/nodemailer": "^6.4.15",
+    "dotenv": "^16.4.5",
     "esbuild": "0.21.4",
     "node-mocks-http": "^1.14.1",
     "ts-jest": "^29.1.4",
@@ -29,6 +32,7 @@
     "argon2": "^0.40.3",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.13",
     "reflect-metadata": "^0.1.14",
     "sequelize": "^6.37.3",
     "sqlite3": "^5.1.7",
