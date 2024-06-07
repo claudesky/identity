@@ -6,5 +6,5 @@ services:
    ports:
      - "7777:8000"
    volumes:
-     - "./dynamodb-data:/home/dynamodblocal/data"
+     - "./dynamodb:/home/dynamodblocal/data"
    working_dir: /home/dynamodblocal
