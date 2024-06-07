@@ -5,7 +5,7 @@ import {
 } from '../modules/exceptions'
 import { Auth } from '../modules/auth-module'
 import { IUserRepository, User } from '../repositories/user/iuser-repository'
-import { hash, verify } from 'argon2'
+import { hash, verify as compare } from 'argon2'
 
 type RegisterRequest = {
   email?: string
@@ -128,10 +128,14 @@ export class AuthController {
       throw new UnexpectedException()
     }
 
-    if (!await verify(user.password, request.password))
+    if (!await compare(user.password, request.password))
       throw new Error('PLACEHOLDER: Invalid credentials')
 
     const tokenResult = await this._auth.newToken(user.id)
+
+    const userResponse = {...user} as any
+
+    delete userResponse.password
 
     res.send({ user, ...tokenResult })
   }
