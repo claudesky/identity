@@ -1,3 +1,6 @@
+const dotenv = require('dotenv')
+dotenv.config({path: '.env.test.local'})
+
 import { describe, expect, it } from '@jest/globals'
 import { AuthController } from '../../../src/controllers/auth-controller'
 import { createRequest, createResponse } from 'node-mocks-http'
