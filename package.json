@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
-    "build": "esbuild --bundle src/index.ts --sourcemap --outfile=dist/app.js --platform=node --external:pg-hstore --drop-labels=DEV"
+    "build": "esbuild --bundle src/index.ts --sourcemap --outfile=dist/app.js --platform=node --external:pg-hstore --external:argon2 --external:sqlite3 --drop-labels=DEV"
   },
   "keywords": [],
   "author": "",
