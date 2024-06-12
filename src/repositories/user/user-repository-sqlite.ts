@@ -16,8 +16,10 @@ export class User extends Model implements UserAttributes {
   declare id: string
   declare email: string
   declare email_verified: boolean
+  declare email_verification_code: string | null
   declare phone_number: string | null
   declare phone_number_verified: boolean
+  declare phone_verification_code: string | null
   declare password: string
   declare name: string
   declare zoneinfo: string | undefined
@@ -38,11 +40,13 @@ export class UserRepositorySequelize implements IUserRepository {
           unique: 'UQ_user_email_phone_number',
         },
         email_verified: DataTypes.BOOLEAN,
+        email_verification_code: DataTypes.STRING,
         phone_number: {
           type: DataTypes.STRING,
           unique: 'UQ_user_email_phone_number',
         },
         phone_number_verified: DataTypes.BOOLEAN,
+        phone_verification_code: DataTypes.STRING,
         password: {
           type: DataTypes.STRING,
           allowNull: false,
