@@ -1,4 +1,5 @@
 import express from 'express'
+import bodyParser from 'body-parser'
 
 import { authService } from './services/auth-service'
 import { userRepositoryService } from './services/user-repository-service'
@@ -14,8 +15,10 @@ DEV: {
 const authController = new AuthController(authService, userRepositoryService)
 
 const app = express()
-const port = process.env.PORT
+const port = process.env.PORT || 3000
 const version = process.env.VERSION
+
+app.use(bodyParser.json())
 
 app.get('/', (_, res) => {
   res.send({
