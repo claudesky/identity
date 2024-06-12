@@ -6,6 +6,7 @@ import {
 import { Auth } from '../modules/auth-module'
 import { IUserRepository, User } from '../repositories/user/iuser-repository'
 import { hash, verify as compare } from 'argon2'
+import { sendEmail } from '../services/mail-service'
 
 type RegisterRequest = {
   email?: string
@@ -95,9 +96,17 @@ export class AuthController {
     if (typeof request.email === 'string') {
       user = await this._userRepository.registerByEmail({
         email: request.email,
+        email_verification_code:
+          Math.round(Math.random()*10000).toString().padStart(4,'0'),
         name: request.name,
         password: await hash(request.password),
         phone_number: request.phone_number,
+      })
+      await sendEmail({
+        to: user.email as string,
+        subject: 'Identity Email Verification',
+        text: 'Thank you for signing up. Your verification code is ' +
+          user.email_verification_code
       })
     } else if (typeof request.phone_number === 'string') {
       user = await this._userRepository.registerByPhoneNumber({
