@@ -1,11 +1,19 @@
 const dotenv = require('dotenv')
 dotenv.config({path: '.env.test.local'})
 
-import { describe, expect, it } from '@jest/globals'
+import { describe, expect, it, jest } from '@jest/globals'
 import { AuthController } from '../../../src/controllers/auth-controller'
 import { createRequest, createResponse } from 'node-mocks-http'
 import { authService } from '../../../src/services/auth-service'
 import { userRepositoryService } from '../../../src/services/user-repository-service'
+
+import {sendEmail}from '../../../src/services/mail-service'
+
+jest.mock('../../../src/services/mail-service', () => {
+  return {
+    sendEmail: jest.fn()
+  }
+})
 
 const authController = new AuthController(authService, userRepositoryService)
 
