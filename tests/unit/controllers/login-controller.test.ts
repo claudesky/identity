@@ -7,8 +7,6 @@ import { createRequest, createResponse } from 'node-mocks-http'
 import { authService } from '../../../src/services/auth-service'
 import { userRepositoryService } from '../../../src/services/user-repository-service'
 
-import {sendEmail}from '../../../src/services/mail-service'
-
 jest.mock('../../../src/services/mail-service', () => {
   return {
     sendEmail: jest.fn()
